@@ -42,26 +42,26 @@ class Data_manager():
         f.close()
 
     def get_next_picture(self):
-        return get_picture(self.index)
+        return self.get_picture(self.index)
 
     def sorted_data(self):
         return self.database.sort(key = lambda x: x["number"])
+
+    def set_skipped(self, skipped):
+        self.got_skipped = skipped
+
+    def get_picture(self, index):
+        if not Data_manager.PICTURES:
+            load_pictures()
+        if len(Data_manager.PICTURES) <= index:
+            if not self.got_skipped:
+                raise EOFError
+            else:
+                return self.got_skipped.pop()
+        return Data_manager.PICTURES[index]
 
 def load_pictures():
     Data_manager.PICTURES = []
     for file in os.listdir("pictures"):
         Data_manager.PICTURES.append(file)
     Data_manager.PICTURES.sort()
-
-def set_skipped(skipped):
-    self.got_skipped = skipped
-
-def get_picture(index):
-    if not Data_manager.PICTURES:
-        load_pictures()
-    if len(Data_manager.PICTURES) <= index:
-        if not self.got_skipped:
-            raise EOFError
-        else:
-            return self.got_skipped.pop()
-    return Data_manager.PICTURES[index]
