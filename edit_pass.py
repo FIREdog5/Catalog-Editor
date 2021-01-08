@@ -85,12 +85,12 @@ def main(old_window=None, return_function=lambda *_: None, continue_function=lam
     def check_errors(data):
         if not data["name"]:
             return "Please provide a name for the picture."
-        if not data["number"]:
-            return "Please provide a number for the picture."
+        if not data["number"] or not data["number"].isnumeric() or int(data["number"]) < 1:
+            return "Please provide a valid number for the picture."
         dataset_numbers = [entry["number"] for entry in data_manager.database]
         if data["number"] != number and data["number"] in dataset_numbers:
             return "A picture in the dataset already uses this number."
-        if not data["description"]:
+        if not data["description"] or data["description"] == "\n":
             return "Please provide a description for the picture."
         if not data["picture"]:
             return "Something went wrong with the picture. Please restart the program."

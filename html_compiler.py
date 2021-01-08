@@ -72,7 +72,7 @@ def main(old_window=None, return_function=lambda *_: None):
             if not file in file_system_pictures:
                 extra_count += 1
             if dataset_pictures.count(file) > 1:
-                duplicate_picture_count = 1
+                duplicate_picture_count += 1
 
         dataset_numbers = [entry["number"] for entry in data_manager.database]
         for number in dataset_numbers:
@@ -102,14 +102,14 @@ def main(old_window=None, return_function=lambda *_: None):
             extra_count_label.configure(text="There are {0} pictures in your dataset that are no longer in the pictures folder.".format(extra_count))
             extra_count_label.text = "There are {0} pictures in your dataset that are no longer in the pictures folder.".format(extra_count)
         if duplicate_picture_count:
-            duplicate_picture_count_label.configure(text="There are {0} duplicate pictures in your dataset.".format(duplicate_picture_count))
-            duplicate_picture_count_label.text = "There are {0} duplicate pictures in your dataset.".format(duplicate_picture_count)
+            duplicate_picture_count_label.configure(text="There are {0} duplicate pictures in your dataset.".format(duplicate_picture_count//2))
+            duplicate_picture_count_label.text = "There are {0} duplicate pictures in your dataset.".format(duplicate_picture_count//2)
         if duplicate_number_count:
-            duplicate_number_count_label.configure(text="There are {0} duplicate numbers in your dataset. Honestly this souldn't be possible without modifying savestate.json, please report this as a bug".format(duplicate_number_count))
-            duplicate_number_count_label.text = "There are {0} duplicate numbers in your dataset. Honestly this souldn't be possible without modifying savestate.json, please report this as a bug".format(duplicate_number_count)
+            duplicate_number_count_label.configure(text="There are {0} duplicate numbers in your dataset. Honestly this souldn't be possible without modifying savestate.json, please report this as a bug".format(duplicate_number_count//2))
+            duplicate_number_count_label.text = "There are {0} duplicate numbers in your dataset. Honestly this souldn't be possible without modifying savestate.json, please report this as a bug".format(duplicate_number_count//2)
         if duplicate_name_count:
-            duplicate_name_count_label.configure(text="There are {0} duplicate names in your dataset.".format(duplicate_name_count))
-            duplicate_name_count_label.text = "There are {0} duplicate names in your dataset.".format(duplicate_name_count)
+            duplicate_name_count_label.configure(text="There are {0} duplicate names in your dataset.".format(duplicate_name_count//2))
+            duplicate_name_count_label.text = "There are {0} duplicate names in your dataset.".format(duplicate_name_count//2)
 
     button2 = tk.Button(master=window, command=verify_database_call, text="Verify Database")
     button2.pack()
@@ -145,7 +145,7 @@ def compile_html(width, height):
     except:
         pass
     html_data = HTML_HEADER
-    data_manager.database.sort(key=lambda x:x["number"])
+    data_manager.database.sort(key=lambda x:int(x["number"]))
     for entry in data_manager.database:
         html_data += HTML_IMAGE.format(entry["number"], entry["name"], entry["picture"], width, height, entry["description"].replace("\n", "<br>"))
     html_data += HTML_FOOTER
