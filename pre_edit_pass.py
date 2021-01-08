@@ -26,7 +26,7 @@ def main(old_window=None, return_function=lambda *_: None):
 
     number_frame = tk.Frame(master=frame, borderwidth=5)
     number_frame.pack(side=tk.LEFT)
-    number_label = tk.Label(master=number_frame, text="Number of entry to edit:")
+    number_label = tk.Label(master=number_frame, text="Number of the entry to be edited:")
     number_entry = tk.Entry(master=number_frame, width=20)
     number_label.pack()
     number_entry.pack()
