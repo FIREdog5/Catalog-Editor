@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def confirm_dialogue(dialogue, function, *args, **kwargs):
+def info_dialogue(dialogue, function, *args, **kwargs):
       confirm_window = tk.Toplevel()
       screen_width = confirm_window.winfo_screenwidth()
       screen_height = confirm_window.winfo_screenheight()
@@ -10,14 +10,9 @@ def confirm_dialogue(dialogue, function, *args, **kwargs):
       greeting.pack()
       frame = tk.Frame(master=confirm_window, borderwidth=5)
       frame.pack()
-      def yes_call():
+      def ok_call():
           confirm_window.grab_release()
           confirm_window.destroy()
           function(*args, **kwargs)
-      button1 = tk.Button(master=frame, command=yes_call, text="Yes", bg="green")
-      button1.pack(side=tk.LEFT)
-      def no_call():
-          confirm_window.grab_release()
-          confirm_window.destroy()
-      button2 = tk.Button(master=frame, command=no_call, text="No", bg="red")
-      button2.pack(side=tk.LEFT)
+      button1 = tk.Button(master=frame, command=ok_call, text="Ok")
+      button1.pack()

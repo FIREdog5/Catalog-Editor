@@ -1,7 +1,8 @@
 import tkinter as tk
 import data_manager as dm
-import html_compiler as hm
+import html_compiler as hc
 import confirm_dialogue as cd
+import info_dialogue as id
 import os
 from PIL import Image, ImageTk
 
@@ -40,7 +41,7 @@ def main(old_window=None, return_function=lambda *_: None):
     try:
         img = os.path.join("pictures", data_manager.get_next_picture())
     except EOFError:
-        hc.main(window=window, return_function=return_function)
+        id.info_dialogue("No images remain, redirecting to catalog creator", hc.main, window=window, return_function=return_function)
     load = Image.open(img)
     load = load.resize((250, 250), Image.ANTIALIAS)
     render = ImageTk.PhotoImage(load)
@@ -79,7 +80,7 @@ def main(old_window=None, return_function=lambda *_: None):
         try:
             new_img = os.path.join("pictures", data_manager.get_next_picture())
         except EOFError:
-            hc.main(window=window, return_function=return_function)
+            id.info_dialogue("No images remain, redirecting to catalog creator", hc.main, window=window, return_function=return_function)
         load = Image.open(new_img)
         load = load.resize((250, 250), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)

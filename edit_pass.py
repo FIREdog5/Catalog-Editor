@@ -1,6 +1,5 @@
 import tkinter as tk
 import data_manager as dm
-import html_compiler as hm
 import confirm_dialogue as cd
 import os
 from PIL import Image, ImageTk
