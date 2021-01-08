@@ -28,6 +28,3 @@ def main(old_window=None, return_function=lambda *_: None):
     button2 = tk.Button(master=window, command=html_call, text="Create catalog.html")
     button2.pack()
     window.mainloop()
-
-dm.load_pictures()
-main()
