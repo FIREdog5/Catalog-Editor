@@ -98,11 +98,23 @@ def main(old_window=None, return_function=lambda *_: None, continue_function=lam
     button = tk.Button(master=window, command=submit_call, text="Save changes and edit something else")
     button.pack()
 
+    def delete_function():
+        data_manager.remove_entry(number)
+        data_manager.save_data()
+
+    def delete_call():
+        cd.confirm_dialogue("Are you sure you want to delete this entry?", delete_function)
+
+    delete_frame = tk.Frame(master=window, borderwidth=50)
+    delete_frame.pack()
+    delete_button = tk.Button(master=delete_frame, command=delete_call, text="Delete this entry", bg="red")
+    delete_button.pack()
+
     def main_menu_call():
         nonlocal window
         cd.confirm_dialogue("Return to main menu and discard unsaved changes?", return_function, window)
 
-    main_menu_frame = tk.Frame(master=window, borderwidth=50)
+    main_menu_frame = tk.Frame(master=window, borderwidth=5)
     main_menu_frame.pack()
     main_menu_button = tk.Button(master=main_menu_frame, command=main_menu_call, text="Main menu")
     main_menu_button.pack()

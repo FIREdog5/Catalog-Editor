@@ -68,6 +68,9 @@ def main(old_window=None, return_function=lambda *_: None):
                 if should_add_skips:
                     data_manager.got_skipped.append(file)
 
+        if should_add_skips:
+            data_manager.save_data()
+
         for file in dataset_pictures:
             if not file in file_system_pictures:
                 extra_count += 1

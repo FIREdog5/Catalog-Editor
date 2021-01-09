@@ -44,6 +44,9 @@ class Data_manager():
     def get_next_picture(self):
         return self.get_picture(self.index)
 
+    def remove_entry(self, index):
+        self.database.pop(self.get_entry_index(index))
+
     def sorted_data(self):
         return self.database.sort(key = lambda x: x["number"])
 
